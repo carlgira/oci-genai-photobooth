@@ -29,3 +29,8 @@ variable "subnet_cidr" {
 variable "vcn_cidr" {
   description = ""
 }
+
+variable "cohere_api_key" {
+  description = ""
+}
+

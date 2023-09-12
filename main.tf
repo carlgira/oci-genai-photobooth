@@ -34,6 +34,10 @@ resource "oci_core_instance" "gpu_instance" {
     ssh_authorized_keys = file(var.ssh_public_key_path)
     user_data           = base64encode(file("setup-instance.sh"))
   }
+
+    extended_metadata = {
+        cohere_api_key = var.cohere_api_key
+    }
 }
 
 # Create datasource for availability domains

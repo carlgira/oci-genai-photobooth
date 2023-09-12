@@ -14,9 +14,11 @@ vgs
 lvextend -l +100%FREE /dev/mapper/ocivolume-root
 xfs_growfs -d /
 
-dnf install wget git git-lfs python39 python39-devel.x86_64 python39-tkinter libsndfile rustc cargo unzip zip -y
+dnf install wget git git-lfs jq python39 python39-devel.x86_64 python39-tkinter libsndfile rustc cargo unzip zip -y
 
 alternatives --set python3 /usr/bin/python3.9
+
+COHERE_KEY=`curl -L http://169.254.169.254/opc/v1/instance/ | jq -r '.metadata."cohere_api_key"'`
 
 # ComfyUI
 su -c "git clone https://github.com/comfyanonymous/ComfyUI.git /home/$USER/ComfyUI" $USER
@@ -30,7 +32,7 @@ cat <<EOT >> /etc/systemd/system/comfyui.service
 Description=systemd service start comfyui
 [Service]
 WorkingDirectory=/home/$USER/ComfyUI
-ExecStart=venv/bin/python main.py
+ExecStart=COHERE_KEY=$COHERE_KEY venv/bin/python main.py
 User=$USER
 [Install]
 WantedBy=multi-user.target
