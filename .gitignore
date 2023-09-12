@@ -35,3 +35,4 @@ terraform.rc
 
 server.key
 server.key.pub
+LOCAL.md
