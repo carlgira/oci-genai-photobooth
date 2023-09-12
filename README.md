@@ -1,10 +1,8 @@
 # OCI Generative AI Photo booth
 
-A terraform script to start a photobooth gradio app using stable diffusion XL and cohere.ai to generate images based on cohere generated descriptions.
+A terraform script to start a photobooth app using stable diffusion XL and cohere.ai to generate images based on cohere generated descriptions.
 
 *You'll need access to GPUs to execute eveything.*
-
-See the next video with all the steps.
 
 ## Requirements
 - Terraform
