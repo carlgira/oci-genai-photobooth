@@ -724,6 +724,25 @@ class CombineInput:
             Output = None
         return ({"node": Output}, self)
 
+class ShowText:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "text": ("TEXT", {"input_format": {"text": "STRING"}}, {"forceInput": True}),
+            }
+        }
+
+    INPUT_IS_LIST = True
+    RETURN_TYPES = ("STRING",)
+    FUNCTION = "notify"
+    OUTPUT_NODE = True
+    OUTPUT_IS_LIST = (True,)
+
+    CATEGORY = "utils"
+
+    def notify(self, text):
+        return {"ui": {"text": text}, "result": (text,)}
 
 # A dictionary that contains all nodes you want to export with their names
 NODE_CLASS_MAPPINGS = {
@@ -739,5 +758,6 @@ NODE_CLASS_MAPPINGS = {
     "Memory_Excel": Memory_Excel,
     "CombineInput": CombineInput,
     "CLIPHeadTextEncode" : CLIPHeadTextEncode,
+    "ShowText": ShowText,
 
 }
