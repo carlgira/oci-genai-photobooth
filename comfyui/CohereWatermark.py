@@ -20,17 +20,20 @@ def add_watermark(base_img_path, top, font_path, text):
     
     width, height = top.size
     
+    # Scale the image to fit into the space of 1024 x 768 resolution
     scale_factor = min(1024 / width, 768 / height)
-    
     new_width = int(width * scale_factor)
     new_height = int(height * scale_factor)
-    
     resized_top_image = top.resize((new_width, new_height))
     
+    # Paste the generated image on top of the template.
     base.paste(resized_top_image, (1044//2 - new_width//2, 778//2 - new_height//2))
-    
     draw = ImageDraw.Draw(base)
+    
+    # Rectangle to where the cohere generated text is going to get shown. 
     rect_position = (30, 860, 1024, 915)
+    
+    # Draw only the text that fits into the previous sized box, if the text does not fit, it stops.
     font_size=20
     font = ImageFont.truetype(font_path, font_size)
     
@@ -77,8 +80,10 @@ class CohereWatermark:
         raw_image = 255 * image[0].numpy()
         pil_image = Image.fromarray(raw_image.astype(np.uint8))
         
+        # Use the input image and the generated text and create the final output.
         result = add_watermark(watermark_path, pil_image, font_path, text)
         
+        # The image must be converted to a torch tensor
         i = ImageOps.exif_transpose(result)
         image = i.convert("RGB")
         image = np.array(image).astype(np.float32) / 255.0

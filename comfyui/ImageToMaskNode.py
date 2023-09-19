@@ -4,6 +4,7 @@ from PIL import Image
 import rembg
 import cv2
 
+# Class to remove chroma green color, you must configure the minimun and the maximun RGB color, to be detected on the image.
 class ImageColorsToMask:
     @classmethod
     def INPUT_TYPES(s):
@@ -37,6 +38,7 @@ class ImageColorsToMask:
         
         return (mask,)
 
+# Use a specific library to remove the background of image and genereate the mask
 class RemoveBackgroundAndMask:
     @classmethod
     def INPUT_TYPES(s):

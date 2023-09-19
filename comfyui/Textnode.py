@@ -6,6 +6,7 @@ from datetime import datetime
 import cohere
 import os
 
+## Cohere API
 co = cohere.Client(os.environ['COHERE_KEY'])
 
 def generate_text_cohere(prompt, model="command", temperature=0.7, max_tokens=200):
@@ -15,6 +16,7 @@ def generate_text_cohere(prompt, model="command", temperature=0.7, max_tokens=20
         max_tokens=max_tokens,
         temperature=temperature)
     return response[0].text
+## Cohere API
 
 output_dir = os.path.abspath("output_folder")
 
