@@ -19,7 +19,7 @@ class ImageColorsToMask:
                 }
         }
 
-    CATEGORY = "mask"
+    CATEGORY = "mask" 
 
     RETURN_TYPES = ("MASK",)
     FUNCTION = "image_to_mask"
