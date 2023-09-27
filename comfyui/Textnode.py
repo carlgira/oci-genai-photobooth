@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 
 ## Cohere API
-cohere_url_service = os.environ['COHERE_KEY'] ## http://something:3000/cohere/generate
+cohere_url_service = "http://" + os.environ['COHERE_KEY'] + ":3000/cohere/generate"
 
 def generate_text_cohere(prompt, model="cohere.command", temperature=0.7, max_tokens=200):
 
