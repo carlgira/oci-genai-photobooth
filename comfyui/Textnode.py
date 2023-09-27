@@ -3,19 +3,25 @@ import requests
 import json
 import folder_paths
 from datetime import datetime
-import cohere
 import os
 
 ## Cohere API
-co = cohere.Client(os.environ['COHERE_KEY'])
+cohere_url_service = os.environ['COHERE_KEY'] ## http://something:3000/cohere/generate
 
-def generate_text_cohere(prompt, model="command", temperature=0.7, max_tokens=200):
-    response = co.generate(
-        model=model,
-        prompt=prompt,
-        max_tokens=max_tokens,
-        temperature=temperature)
-    return response[0].text
+def generate_text_cohere(prompt, model="cohere.command", temperature=0.7, max_tokens=200):
+
+    payload = {
+        "text": prompt,
+        "max_tokens": max_tokens,
+        "temperature": temperature,
+        "model_id": model
+    }
+    headers = {'Content-Type': 'application/json'}
+
+    response = requests.post(cohere_url_service, json=payload, headers=headers)
+    data = response.json()
+
+    return data["generated_texts"][0][0]["text"]
 ## Cohere API
 
 output_dir = os.path.abspath("output_folder")

@@ -23,6 +23,7 @@ COHERE_KEY=`curl -L http://169.254.169.254/opc/v1/instance/ | jq -r '.metadata."
 # ComfyUI
 su -c "git clone https://github.com/comfyanonymous/ComfyUI.git /home/$USER/ComfyUI" $USER
 su -c "git clone https://github.com/carlgira/oci-genai-photobooth /home/$USER/oci-genai-photobooth" $USER
+su -c "cd /home/$USER/oci-genai-photobooth && git checkout cohere-service" $USER
 su -c "cd /home/$USER/ComfyUI && python3 -m venv venv && source venv/bin/activate && pip install torch torchvision torchaudio opencv-python cohere --extra-index-url https://download.pytorch.org/whl/cu118 xformers && pip install -r requirements.txt && pip install rembg numpy==1.24 oci" $USER
 su -c "cp /home/$USER/oci-genai-photobooth/comfyui/* /home/$USER/ComfyUI/custom_nodes" $USER
 su -c "wget -O /home/$USER/ComfyUI/models/checkpoints/sd_xl_base_1.0.safetensors https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors" $USER
